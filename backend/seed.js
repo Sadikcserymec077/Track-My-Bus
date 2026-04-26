@@ -82,7 +82,11 @@ async function seed() {
     console.log('  Admin:   phone=admin      password=admin123');
     console.log('  Driver:  phone=driver1    password=driver123');
     console.log('  Student: phone=9876543210 password=student123');
-    await mongoose.disconnect();
+    // await mongoose.disconnect(); // Keep connection alive for server
 }
 
-seed().catch((err) => { console.error(err); process.exit(1); });
+module.exports = seed;
+
+if (require.main === module) {
+    seed().catch((err) => { console.error(err); process.exit(1); });
+}

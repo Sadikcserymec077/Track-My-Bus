@@ -62,8 +62,17 @@ socketHandler(io);
 // MongoDB + Server start
 const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => {
+    .then(async () => {
         console.log('✅ MongoDB connected');
+
+        // Auto-seed if needed
+        try {
+            const seed = require('./seed');
+            await seed();
+        } catch (err) {
+            console.error('⚠️ Auto-seed failed:', err.message);
+        }
+
         server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
     })
     .catch((err) => {
