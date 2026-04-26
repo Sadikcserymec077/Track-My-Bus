@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bus-primary: #2563eb;
+  --bus-secondary: #7c3aed;
+  --bus-dark: #0f172a;
+  --bus-card: #1e293b;
+  --bus-border: rgba(255,255,255,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #0f172a;
+  color: #f1f5f9;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+
+/* Glass card */
+.glass {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Bus marker pulse */
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.bus-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: #3b82f6;
+  animation: ripple 2s ease-out infinite;
+  z-index: -1;
+}
+
+/* Leaflet map dark override */
+.leaflet-container {
+  background: #1e293b !important;
+  border-radius: 12px;
+}
+
+.leaflet-tile {
+  filter: brightness(0.85) saturate(0.8);
+}
+
+/* Sidebar */
+.sidebar {
+  background: linear-gradient(180deg, #0f172a 0%, #1a1f35 100%);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Input */
+.input-field {
+  @apply w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white 
+         placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 
+         focus:border-transparent transition-all duration-200;
+}
+
+/* Button variants */
+.btn-primary {
+  @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold 
+         rounded-xl hover:from-blue-500 hover:to-violet-500 transition-all duration-200 
+         shadow-lg shadow-blue-500/25 active:scale-95;
+}
+
+.btn-danger {
+  @apply px-6 py-3 bg-gradient-to-r from-red-600 to-rose-600 text-white font-semibold 
+         rounded-xl hover:from-red-500 hover:to-rose-500 transition-all duration-200 
+         shadow-lg shadow-red-500/25 active:scale-95;
+}
+
+.btn-success {
+  @apply px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold 
+         rounded-xl hover:from-emerald-500 hover:to-teal-500 transition-all duration-200 
+         shadow-lg shadow-emerald-500/25 active:scale-95;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-slate-700 text-white font-semibold rounded-xl 
+         hover:bg-slate-600 transition-all duration-200 active:scale-95;
+}
+
+/* Card animation */
+.card-hover {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10;
+}
+
+/* Badge */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-green { @apply badge bg-emerald-500/20 text-emerald-400; }
+.badge-red { @apply badge bg-red-500/20 text-red-400; }
+.badge-blue { @apply badge bg-blue-500/20 text-blue-400; }
+.badge-yellow { @apply badge bg-amber-500/20 text-amber-400; }
+
+/* SOS shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.sos-shake { animation: shake 0.5s ease-in-out; }
+
+/* Mobile bottom nav */
+.mobile-nav {
+  @apply fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-800 
+         flex items-center justify-around py-3 px-4 z-50 md:hidden;
+}
+
+/* Status dot */
+.status-dot {
+  @apply w-2 h-2 rounded-full inline-block mr-1.5;
+}
+.status-active { @apply status-dot bg-emerald-400 animate-pulse; }
+.status-inactive { @apply status-dot bg-slate-500; }
